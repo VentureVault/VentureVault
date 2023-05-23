@@ -18,10 +18,10 @@ userRouter.get('/', (req, res) => {
   res.status(200).json(data)
 });
 
-userRouter.post('/database-data',
-userController.checkUsername,
-  (req, res) => {
-  res.status(200).json(res.locals)
-});
+// userRouter.post('/database-data',
+// userController.checkUsername,
+//   (req, res) => {
+//   res.status(200).json(res.locals)
+// });
 
 module.exports = userRouter;
