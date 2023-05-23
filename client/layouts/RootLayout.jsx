@@ -8,6 +8,7 @@ const RootLayout = () => {
         <nav id='main-nav'>
           <NavLink to='/' className='nav-link'>Home</NavLink>
           <NavLink to='/PageTwo' className='nav-link'>Page Two</NavLink>
+          <NavLink to='/Activity' className='nav-link'>Activity</NavLink>
         </nav>
       </header>
       <main>

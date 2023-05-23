@@ -3,7 +3,8 @@ import { createBrowserRouter, createRoutesFromElements, RouterProvider, Route } 
 
 //pages, loaders
 import Home from './pages/Home';
-import PageTwo from './pages/PageTwo'
+import PageTwo from './pages/PageTwo';
+import ActivityPage from './pages/ActivityPage/ActivityPage';
 
 //context
 import { userContext } from './context';
@@ -19,15 +20,19 @@ const router = createBrowserRouter(
         path='/PageTwo'
         element={<PageTwo key='PageTwo' />}
       />
+      <Route
+        path='/Activity'
+        element={<ActivityPage key='ActivityPage' />}
+      />
     </Route>
   )
 )
 
 // const [ user, setUser ] = useState(null);
 //Until signup is set
-const [ user, setUser ] = useState('Kasey');
 
 const App = () => {
+  const [ user, setUser ] = useState('Kasey');
   return (
     <userContext.Provider value={{ user, setUser }}>  
       <RouterProvider router={router} />
