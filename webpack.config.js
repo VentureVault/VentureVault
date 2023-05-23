@@ -19,6 +19,33 @@ module.exports = {
     }),
   ],
 
+  devServer: {
+    // host: 'localhost',
+    // port: 8080,
+    // // enable HMR on the devServer
+    // hot: true,
+    // // fallback to root for other urls
+    // historyApiFallback: true,
+
+    // static: {
+    //   // match the output path
+    //   directory: path.resolve(__dirname, 'dist'),
+    //   // match the output 'publicPath'
+    //   publicPath: '/',
+    // },
+
+    // headers: { 'Access-Control-Allow-Origin': '*' },
+
+    proxy: {
+      '/api/**': {
+        target: 'http://localhost:3000/',
+        secure: false,
+      },
+    },
+    // for react router if you use it
+    historyApiFallback: true
+  },
+
   module: {
     rules: [
       {
