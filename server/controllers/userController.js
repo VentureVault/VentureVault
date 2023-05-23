@@ -1,4 +1,4 @@
-const db = require('../models/renameMe.js');
+const db = require('../models/vaultModel.js');
 
 const userController = {};
 
