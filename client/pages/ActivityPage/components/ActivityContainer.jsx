@@ -1,5 +1,7 @@
 import React from 'react';
-
+// import components
+import Activity from './Activity';
+import AddActivity from './AddActivity';
 // activity_name given from backend
 // const mockActivityObject = {
 //   activityName: 'Hike the PCT',
@@ -8,37 +10,36 @@ import React from 'react';
 //   urlArray: ['https://www.pcta.org/']
 // };
 
-// const ActivityContainer = (props) => {
 const ActivityContainer = ({activityArray}) => {
   // array of activity divs
   const activities = [];
   // create containers for each activity
-  for (let i = 0; i < activityArray.length; i++) {
+  activityArray.forEach(activity => {
     // grab necessary data to add to Activity component
-    // const { 
-    //   activity_id: id,
-    //   activity_name: activityName, // string
-    //   location_name: locationName, // string
-    //   detail_urls: urls, // array
-    // } = activityArray; // change to activity object when db is set up
     const { 
-      activityId,
+      activityId, // string
       activityName, // string
       locationName, // string
-      urls, // array
-    } = activityArray; // change to activity object when db is set up
+      urls // array
+    } = activity; 
+  
     activities.push(
       <Activity 
-        key={activityID}
+        key={activityId}
         activityName={activityName}
         locationName={locationName}
         urls={urls}
       />
-    )
-  };
+    );
+  });
+
   return(
-    <div className='activityContainer'>
+    <div id='activityContainer'>
       {activities}
     </div>
-  )
+  );
 };
+  
+
+
+export default ActivityContainer;

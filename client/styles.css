@@ -1,0 +1,106 @@
+/* <~~~~~ COMPUTER SCREENS ~~~~~> */
+/* <----- Activities -----> */
+
+#ActivityPage {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  border: 1px;
+};
+
+#activityContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  /* row-gap: 20px; */
+};
+
+.activity {
+  margin: 5%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  border: 1px solid black;
+  border-radius: 10px;
+  row-gap: 5px;
+};
+
+.deleteActivity {
+  margin: 1.5%;
+  align-self: end;
+  border: none;
+  background-color: white;
+
+};
+
+.checkBox {
+  margin: 1.5%;
+  align-self: flex-start
+};
+
+.activityName {
+  padding-left: 10%;
+  align-self: flex-start;
+};
+
+.locationName {
+
+};
+
+.urlContainer {
+
+};
+
+.urlDiv {
+
+};
+
+
+
+/* <~~~~~ MOBILE DEVICE ~~~~~> */
+@media all and (max-width: 500px) {
+/* <----- Activities -----> */
+
+ #ActivityPage {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  border: 1px;
+  };
+
+  #activityContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    border: 1px;
+    row-gap: 20px;
+  };
+
+  .activity {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border: 1px;
+    row-gap: 5px;
+  };
+
+  .activityName {
+
+  };
+
+  .locationName {
+
+  };
+
+  .urlContainer {
+
+  };
+
+  .urlDiv {
+
+  };
+
+  .deleteActivity {
+    align-self: right;
+  }; 
+};
