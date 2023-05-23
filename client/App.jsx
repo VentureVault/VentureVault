@@ -1,9 +1,12 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { createBrowserRouter, createRoutesFromElements, RouterProvider, Route } from "react-router-dom";
 
 //pages, loaders
 import Home from './pages/Home';
 import PageTwo from './pages/PageTwo'
+
+//context
+import { userContext } from './context';
 
 //layouts
 import RootLayout from './layouts/RootLayout';
@@ -20,10 +23,15 @@ const router = createBrowserRouter(
   )
 )
 
+// const [ user, setUser ] = useState(null);
+//Until signup is set
+const [ user, setUser ] = useState('Kasey');
 
 const App = () => {
   return (
-      <RouterProvider router={router}/>
+    <userContext.Provider value={{ user, setUser }}>  
+      <RouterProvider router={router} />
+    </userContext.Provider>  
   )
 }
 
