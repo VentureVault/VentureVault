@@ -2,7 +2,10 @@ const express = require('express');
 const userController = require('../controllers/userController');
 const userRouter = express.Router();
 
-// These are all tests
+//Add routes here!
+
+
+// These are all tests, delete and change when you like!
 const data = {
   message: 'I\'m the one you want',
 }

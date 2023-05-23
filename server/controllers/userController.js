@@ -2,6 +2,9 @@ const db = require('../models/renameMe.js');
 
 const userController = {};
 
+//Add controllers here!
+
+
 /* Works with old database as a sample
 // CHECK USERNAME IN DATABASE --------------------------------------------------------------------------------------------------------------------------------------
 userController.checkUsername = (req, res, next) => {
