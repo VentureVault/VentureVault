@@ -20,7 +20,7 @@ app.use('/api/activity', activityRouter);
 
 
 app.get('/', (req, res) => {
-  res.status(404).send('Nothing to see here!')
+  res.status(404).send('Nothing to see here!!!')
 })
 
 
