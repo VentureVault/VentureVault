@@ -1,6 +1,7 @@
 const express = require('express');
 const app = express();
 const userRouter = require('./routes/userRouter');
+const activityRouter = require('./routes/activityRouter');
 
 const PORT = 3000;
 
@@ -10,10 +11,12 @@ app.use(express.urlencoded({ extended: true }));
 
 app.use('/api/user', userRouter);
 
+app.use('/api/activity', activityRouter);
 
-app.get('/api', (req, res) => {
-  res.send('hello world from express!');
-});
+
+// app.get('/api', (req, res) => {
+//   res.send('hello world from express!');
+// });
 
 
 app.get('/', (req, res) => {

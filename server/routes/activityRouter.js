@@ -4,7 +4,11 @@ const activityRouter = express.Router();
 
 //Add routes here!
 
+// get Activity
 
+// post Activity
+
+// delete Activity
 
 
 module.exports = activityRouter;

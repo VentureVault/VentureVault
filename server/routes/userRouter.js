@@ -4,6 +4,9 @@ const userRouter = express.Router();
 
 //Add routes here!
 
+// user login route
+ 
+// user signup route
 
 // These are all tests, delete and change when you like!
 const data = {
