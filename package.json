@@ -10,7 +10,7 @@
     "backend": "NODE_ENV=development nodemon ./server/server.js"
   },
   "keywords": [],
-  "author": "Mark Teets",
+  "author": "Jon Cruz, Das Kang, Mark Teets, Kasey Wolff",
   "license": "MIT",
   "dependencies": {
     "express": "^4.18.2",

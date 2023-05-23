@@ -25,11 +25,14 @@ const ActivityContainer = ({activityArray}) => {
       activityId,
       activityName, // string
       locationName, // string
-      url, // array
+      urls, // array
     } = activityArray; // change to activity object when db is set up
     activities.push(
       <Activity 
-        key = {activityID}
+        key={activityID}
+        activityName={activityName}
+        locationName={locationName}
+        urls={urls}
       />
     )
   };
