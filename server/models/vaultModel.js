@@ -16,7 +16,8 @@ const PG_URI =
 // This will be required in the controllers to be the access point to the database
 module.exports = {
 	query: (text, params, callback) => {
-		 console.log("db is connected");
+		//  console.log("db is connected");
 		return pool.query(text, params, callback);
 	},
+	// mulit: (text, params, )
 };

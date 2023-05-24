@@ -8,7 +8,7 @@ const userRouter = express.Router();
 userRouter.post('/login',
 userController.userVarification,
   (req, res) => {
-    console.log('--Sending data from POST request from /api/user/login',res.locals);
+    //console.log('--Sending data from POST request from /api/user/login',res.locals);
     return res.status(200).json(res.locals);
   }
 );
@@ -16,7 +16,7 @@ userController.userVarification,
 userRouter.post('/signup',
 userController.userSignup,
   (req, res) => {
-    console.log('--Sending data from POST request from /api/user/signup',res.locals);
+    //console.log('--Sending data from POST request from /api/user/signup',res.locals);
     return res.status(200).json(res.locals);
   }
 );

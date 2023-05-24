@@ -66,28 +66,102 @@ activityController.getActivities = (req, res, next) => {
 	});
 }
 
-//post controller 
-activityController.postActivity = (req, res, next) => {
-  const { username, activity_name, category_name, urls } = req.body;
-  const queryString = ``
- db.query(queryString, [username])
-  .then(data => {
-    console.log('data.rows in activityController.postActivity', data.rows);
-    res.locals.afterPost = data.rows
-    return next(); 
-  })
-  .catch((err) => {
-		return next({
-			log: `activityController.postActivity middleware error: ${err.message}`,
-			status: 501,
-			message:'Failed to execute query to POST all activities',
-		});
-	});
+
+const urlQueryBuilder = async (urlArray, activity_id) => {
+  for (const url of urlArray) {
+    const urlQuery = `INSERT INTO detail_urls (url) VALUES ($1)
+                       RETURNING id;`
+    
+    const urlData = await db.query(urlQuery, [url]);
+    const url_id = urlData.rows[0].id;
+
+    console.log('url_id', url_id);
+    
+    const urlJoinTableQuery = `INSERT INTO activity_detail_urls (activity_id, detail_url_id) VALUES ($1, $2) RETURNING *`;
+    const urlJoinTableData = await db.query(urlJoinTableQuery, [activity_id, url_id]);
+
+    console.log('urlJoinTableData', urlJoinTableData.rows);
+  }
 }
+
+
+//post controller 
+activityController.postActivity = async (req, res, next) => {
+  const { username, activity_name, category_name, urls } = req.body;
+
+  let user_id, activity_id, category_id;
+  
+  try {
+
+    const queryString0 = `SELECT id FROM user_info
+                          WHERE username = $1;`
+
+    const userData = await db.query(queryString0, [username]);
+
+    user_id = userData.rows[0].id;
+    console.log('user_id', user_id);
+ 
+    const queryString1 = `INSERT INTO activities (activity_name) VALUES ($1)
+                          RETURNING id;`
+
+    const activityData = await db.query(queryString1, [activity_name]);
+
+    activity_id = activityData.rows[0].id
+    console.log('activity_id', activity_id);
+
+    const queryString2 = `INSERT INTO category (category_name) VALUES ($1)
+                          RETURNING id;`
+
+    const categoryData = await db.query(queryString2, [category_name])
+
+    category_id = categoryData.rows[0].id
+    console.log('category_id', category_id);
+    
+    const queryString3 = `INSERT INTO users_activities (user_info_id, activity_id) VALUES ($1, $2) RETURNING *`
+
+    const userInfoActivities = await db.query(queryString3, [user_id, activity_id])
+    
+    console.log('returning from users_activities',userInfoActivities.rows)
+
+    const queryString4  = `INSERT INTO activity_category (category_id, activity_id) VALUES ($1, $2) 
+    RETURNING *`
+    
+    const activitiesCategory = await db.query(queryString4, [category_id, activity_id])
+
+    console.log('returning from activity_category',activitiesCategory.rows)
+
+    urlQueryBuilder(urls, activity_id);
+
+    return next();
+    
+  } catch (err) {
+      return next({
+        log: `activityController.postActivity middleware error: ${err.message}`,
+        status: 501,
+        message: 'Failed to execute query to POST all activities',
+      });
+    }
+  };
+  
+
+  // INSERT INTO category (category_name) VALUES ($3);
+  // INSERT INTO detail_urls (url) VALUES ($4);`
+  // INSERT INTO detail_urls (url) VALUES ($5);
+  // INSERT INTO detail_urls (url) VALUES ($6);`
+
+  // let queryString = urlQueryBuilder(urls);
+  // console.log('URLS', urls, typeof urls);
+  // console.log(queryString);
+
 
 //delete controller 
 activityController.deleteActivity = (req, res, next) => {
   const { username, activity_id } = req.body;
+
+  //get ids
+  //delete ids in join tables
+  //delete items from each table
+
   const queryString = ``
  db.query(queryString, [username])
   .then(data => {
