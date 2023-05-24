@@ -2,25 +2,36 @@ const express = require('express');
 const activityController = require('../controllers/activityController');
 const activityRouter = express.Router();
 
-//Add routes here!
+
+activityRouter.post('/get-by-category',
+activityController.getActivitiesByCategory,
+  (req, res) => {
+    //console.log('--Sending data from GET request from /api/activity/--',res.locals.afterGet);
+    return res.status(200).json(res.locals.afterGet);
+  }
+);
+
 
 // get Activity
-activityRouter.get('/:username',
+activityRouter.post('/get-all',
 activityController.getActivities,
   (req, res) => {
     //console.log('--Sending data from GET request from /api/activity/--',res.locals.afterGet);
     return res.status(200).json(res.locals.afterGet);
   }
 );
-// post Activity
-activityRouter.post('/',
+
+
+// add Activity
+activityRouter.post('/add-activity',
   activityController.postActivity,
-  activityController.getActivities,
+  activityController.getActivitiesByCategory,
   (req, res) => {
     //console.log('--Sending data from POST request from /api/activity/--',res.locals.afterGet);
     return res.status(200).json(res.locals.afterGet);
   }
 );
+
 
 // patch Activity
 activityRouter.patch('/',

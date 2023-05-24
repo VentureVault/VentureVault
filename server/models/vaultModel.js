@@ -19,5 +19,4 @@ module.exports = {
 		//  console.log("db is connected");
 		return pool.query(text, params, callback);
 	},
-	// mulit: (text, params, )
 };
