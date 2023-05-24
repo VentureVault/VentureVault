@@ -3,7 +3,8 @@ import { createBrowserRouter, createRoutesFromElements, RouterProvider, Route } 
 
 //pages, loaders
 import Home from './pages/Home';
-import PageTwo from './pages/PageTwo'
+// import PageTwo from './pages/PageTwo';
+import ActivityPage from './pages/ActivityPage/ActivityPage';
 
 //context
 import { userContext } from './context';
@@ -15,9 +16,13 @@ const router = createBrowserRouter(
   createRoutesFromElements(
     <Route path='/' element={<RootLayout/>}>
       <Route index element={<Home/>} />
-      <Route
+      {/* <Route
         path='/PageTwo'
         element={<PageTwo key='PageTwo' />}
+      /> */}
+      <Route
+        path='/Activity'
+        element={<ActivityPage key='ActivityPage' />}
       />
     </Route>
   )
@@ -27,9 +32,7 @@ const router = createBrowserRouter(
 //Until signup is set
 
 const App = () => {
-  const [user, setUser] = useState('Kasey');
-  
-  
+  const [ user, setUser ] = useState('Kasey');
   return (
     <userContext.Provider value={{ user, setUser }}>  
       <RouterProvider router={router} />
