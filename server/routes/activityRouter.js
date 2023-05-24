@@ -21,6 +21,7 @@ activityController.getActivities,
   }
 );
 
+
 // add Activity
 activityRouter.post('/add-activity',
   activityController.postActivity,
@@ -31,15 +32,6 @@ activityRouter.post('/add-activity',
   }
 );
 
-// post Activity
-// activityRouter.post('/',
-//   activityController.postActivity,
-//   activityController.getActivitiesByCategory,
-//   (req, res) => {
-//     //console.log('--Sending data from POST request from /api/activity/--',res.locals.afterGet);
-//     return res.status(200).json(res.locals.afterGet);
-//   }
-// );
 
 // patch Activity
 activityRouter.patch('/',
