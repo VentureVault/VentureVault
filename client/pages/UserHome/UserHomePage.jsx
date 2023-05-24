@@ -35,7 +35,7 @@ const UserHomePage = () => {
       return;
     }
 
-    setCategory( newCategory );
+    setCategory(newCategory);
 
     pageInfo.current = '/UserHomePage';
     return;
