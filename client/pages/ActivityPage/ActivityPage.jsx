@@ -23,7 +23,7 @@ const mockActivityArray = [mockActivityObject1, mockActivityObject2];
 
 const ActivityPage = () => {
   const activitiesFromCategory = useLoaderData();
-  const [activityArray, setActivityArray] = useState(mockActivityArray); // *** change for real data
+  const [activityArray, setActivityArray] = useState(activitiesFromCategory); // *** change for real data
   const [expanded, setExpanded] = useState(false);
   const { category } = useContext(categoryContext);
   const { pageInfo } = useContext(pageContext);
@@ -38,8 +38,8 @@ const ActivityPage = () => {
       <h1>{category}</h1>
       <button id='addActivityButton' onClick={() => setExpanded(!expanded)}>Add New Activity</button>
       {expanded && <AddActivity category={category} setActivityArray={setActivityArray} expanded={expanded} setExpanded={setExpanded} />}
-      {/* <ActivityContainer activityArray={activityArray} /> */}
-      <ActivityContainer activityArray={activitiesFromCategory} />
+      {/* <ActivityContainer activityArray={mockActivityArray} /> */}
+      <ActivityContainer activityArray={activityArray} />
     </div>
   );
 };
