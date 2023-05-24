@@ -27,22 +27,29 @@ const Activity = ({activityId, activityName, locationName, urls}) => {
 
   return (
     <div className='activity'>
-      <button onClick={deleteActivity} className='deleteActivity'>X</button>
+
+      
       <input
         className='checkBox'
         type='checkbox'
         checked={checked}
         onChange={completedBucketListItem}
       />
-      <div className='activityName'>
-        {activityName}
+
+      <div className='activityInfo'>
+        <div className='activityName'>
+          {activityName}
+        </div>
+        <div className='locationName'>
+          {locationName}
+        </div>
+        <div className='urlContainer'>
+          {urlDivs}
+        </div>
       </div>
-      <div className='locationName'>
-        {locationName}
-      </div>
-      <div className='urlContainer'>
-        {urlDivs}
-      </div>
+
+      <div className='photo'></div>
+      <button onClick={deleteActivity} className='deleteActivity'>X</button>
     </div>
   )
 };
