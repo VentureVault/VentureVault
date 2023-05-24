@@ -29,6 +29,7 @@ const LoginPage = () => {
   }, [data]);
 
 	return (
+		<div className= 'login-page'>
 		<div className='login-container'>
 			<h1>Your very own Venture Vault!</h1>
 			<h2>Please Log In</h2>
@@ -36,12 +37,12 @@ const LoginPage = () => {
 			<Form method='post' action='/' className='login-form'>
 				<label>
 					<span>Username</span>
-					<input type='username' name='username' required />
+					<input type='username' name='username' placeholder= "Enter your username" required />
 				</label>
 				<br></br>
 				<label>
 					<span>Password</span>
-					<input type='password' name='password' required />
+					<input type='password' name='password' placeholder="Enter your password" required />
 				</label>
 				{data?.error && <p>{data.error}</p>}
 				<br></br>
@@ -52,6 +53,7 @@ const LoginPage = () => {
 				<p>No account?</p>
 				<Link to='/SignUpPage'> Sign up!</Link>
 			</div>
+		</div>
 		</div>
 	);
 };
