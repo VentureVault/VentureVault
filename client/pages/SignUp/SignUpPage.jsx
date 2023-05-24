@@ -31,28 +31,33 @@ const SignUpPage = () => {
   }, [data]);
 
   return (
-    <div className="login-container">
-      <h1>Create New Account</h1>
-      <Form method='post' action='/SignupPage' className='login-form'>
-        <label>
-          <span>New Username</span>
-          <input type="username" name="username" required />
-        </label>
-        <br></br>
-        <label>
-          <span>New Password</span>
-          <input type="password" name="password" required />
-        </label>
-        <br></br>
-        <label>
-          <span>Choose the name you'd like to see here</span>
-          <input type="first_name" name="first_name" required />
-        </label>
-        <br></br>
-        {data?.error && <p>{data.error}</p>}
-          <button>Submit</button>
-      </Form>
-
+    <div className= 'login-page'>
+      <div className="login-container">
+        <h1>Venture Vault</h1>
+        <h2>Create New Account</h2>
+        <Form method='post' action='/SignupPage' className='login-form'>
+          <label>
+            <span>Username</span>
+            <br />
+            <input type="username" name="username" placeholder="Enter your username" required />
+          </label>
+          <br></br>
+          <label>
+            <span>Password</span>
+            <br />
+            <input type="password" name="password" placeholder="Enter your password" required />
+          </label>
+          <br></br>
+          <label>
+            <span>Nickname</span>
+            <br />
+            <input type="first_name" name="first_name" placeholder='Enter your nickname' required />
+          </label>
+          <br></br>
+          {data?.error && <p>{data.error}</p>}
+            <button>Submit</button>
+        </Form>
+      </div>
     </div>
   )
 };

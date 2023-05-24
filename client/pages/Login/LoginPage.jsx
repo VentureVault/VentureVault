@@ -33,15 +33,16 @@ const LoginPage = () => {
 		<div className='login-container'>
 			<h1>Venture Vault</h1>
 			<h2>Please Log In</h2>
-			<br></br>
 			<Form method='post' action='/' className='login-form'>
 				<label>
-					<span>Username</span>
+            <span>Username</span>
+            <br />
 					<input type='username' name='username' placeholder= "Enter your username" required />
 				</label>
 				<br></br>
 				<label>
-					<span>Password</span>
+            <span>Password</span>
+            <br />
 					<input type='password' name='password' placeholder="Enter your password" required />
 				</label>
 				{data?.error && <p>{data.error}</p>}

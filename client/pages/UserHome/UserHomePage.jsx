@@ -78,11 +78,11 @@ const UserHomePage = () => {
       <div className= 'home-page-func'>
     <>
 			<div className='user-home-page'>
-				<h1>User Home Page</h1>
+          <h1>{ `${user.firstName}'s Bucket List`}</h1>
 				<div id='create-new-category-div' className=' '>
 					<input
 						type='text'
-						placeholder='Enter your new category here'
+						placeholder='Enter new category'
 						onChange={(e) => setNewCategory(e.target.value)}
 					/>
 					<button onClick={handleCreateCategory}>Create New Category</button>

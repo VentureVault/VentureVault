@@ -20,7 +20,7 @@ const Activity = ({activityId, activityName, locationName, urls}) => {
   for (let i = 0; i < urls.length; i++) {
     urlDivs.push(
       <div className='url'>
-        {urls[i]}
+        {convertUrl(urls[i])}
       </div>
     )
   };
@@ -55,3 +55,7 @@ const Activity = ({activityId, activityName, locationName, urls}) => {
 };
 
 export default Activity;
+
+function convertUrl(url) {
+  return (<a href={url} target="_blank" >{url}</a>)
+}

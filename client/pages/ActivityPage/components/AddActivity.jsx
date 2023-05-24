@@ -68,9 +68,9 @@ const AddActivity = ({ category, setActivityArray, expanded, setExpanded }) => {
         </div>
         {/* urls: */}
         <br />
-        {/* {urls} */}
         <div className='urlDiv'>
           <span className='urlEntry'>Add helpful links: </span>
+            {convertUrls(urls)}
             <div className='urlInput'>
               <input className='bucketlistText' type="text" value={url} name="url" onChange={(e) => {setUrl(e.target.value)}}/>
               <button className='addUrlButton'onClick={addUrl}>+</button>
@@ -87,3 +87,7 @@ const AddActivity = ({ category, setActivityArray, expanded, setExpanded }) => {
 }
 
 export default AddActivity
+
+function convertUrls(urls) {
+  return urls.map(url => <a href={url} target="_blank" >{url}</a>)
+}
