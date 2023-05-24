@@ -25,9 +25,11 @@ const router = createBrowserRouter(
 
 // const [ user, setUser ] = useState(null);
 //Until signup is set
-const [ user, setUser ] = useState('Kasey');
 
 const App = () => {
+  const [user, setUser] = useState('Kasey');
+  
+  
   return (
     <userContext.Provider value={{ user, setUser }}>  
       <RouterProvider router={router} />
