@@ -10,16 +10,15 @@ activityController.getActivities = (req, res, next) => {
   const username = req.body.username //|| req.params.username;
   console.log('username from getActivities', username);
   const queryString = 
-    //`SELECT * FROM activities`
   `SELECT activity_name, completed, activities.id as activity_id, location_name, category_name, url FROM activities
   JOIN users_activities ON activities.id = users_activities.activity_id
   JOIN user_info ON users_activities.user_info_id = user_info.id
-  JOIN activity_locations ON activities.id = activity_locations.activity_id
-  JOIN locations ON activity_locations.location_id = locations.id
+  LEFT JOIN activity_locations ON activities.id = activity_locations.activity_id
+  LEFT JOIN locations ON activity_locations.location_id = locations.id
   JOIN activity_category ON activities.id = activity_category.activity_id
   JOIN category ON activity_category.category_id = category.id
-  JOIN activity_detail_urls ON activities.id = activity_detail_urls.activity_id
-  JOIN detail_urls ON activity_detail_urls.detail_url_id = detail_urls.id
+  LEFT JOIN activity_detail_urls ON activities.id = activity_detail_urls.activity_id
+  LEFT JOIN detail_urls ON activity_detail_urls.detail_url_id = detail_urls.id
   WHERE username = $1`
   db.query(queryString, [username])
   .then(data => {
@@ -84,17 +83,17 @@ activityController.getActivitiesByCategory = (req, res, next) => {
   `SELECT activity_name, completed, activities.id as activity_id, location_name, category_name, url FROM activities
   JOIN users_activities ON activities.id = users_activities.activity_id
   JOIN user_info ON users_activities.user_info_id = user_info.id
-  JOIN activity_locations ON activities.id = activity_locations.activity_id
-  JOIN locations ON activity_locations.location_id = locations.id
+  LEFT JOIN activity_locations ON activities.id = activity_locations.activity_id
+  LEFT JOIN locations ON activity_locations.location_id = locations.id
   JOIN activity_category ON activities.id = activity_category.activity_id
   JOIN category ON activity_category.category_id = category.id
-  JOIN activity_detail_urls ON activities.id = activity_detail_urls.activity_id
-  JOIN detail_urls ON activity_detail_urls.detail_url_id = detail_urls.id
+  LEFT JOIN activity_detail_urls ON activities.id = activity_detail_urls.activity_id
+  LEFT JOIN detail_urls ON activity_detail_urls.detail_url_id = detail_urls.id
   WHERE username = $1 and category_name = $2`
 
   db.query(queryString, [username, category_name])
   .then(data => {
-    // console.log('data.rows in activityController.getActivities', data.rows);
+    console.log('data.rows in activityController.getActivities', data.rows);
     const cache = {}
     data.rows.forEach(row => {
       if (!cache[row.activity_id]) {

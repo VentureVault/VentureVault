@@ -35,7 +35,7 @@ const UserHomePage = () => {
       return;
     }
 
-    setCategory({ newCategory });
+    setCategory(newCategory);
 
     pageInfo.current = '/UserHomePage';
     return;
@@ -88,7 +88,7 @@ const UserHomePage = () => {
 			</div>
 			<div id='category-container-div' className=''>
 				<h2>Your Categories</h2>
-        {JSON.stringify(filterCategory(loadedActivities))}
+        {/* {JSON.stringify(filterCategory(loadedActivities))} */}
         <br />
         {makeCategoryButtons(loadedActivities)}
 			</div>
