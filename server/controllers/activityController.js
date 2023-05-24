@@ -11,33 +11,20 @@ activityController.getActivities = (req, res, next) => {
   //const { first_name } = req.body;
   const queryString = 
     //`SELECT * FROM activities`
-    // `SELECT * FROM activities JOIN users_activities ON activities.id = users_activities.activity_id JOIN user_info ON users_activities.user_info_id = user_info.id  WHERE username = $1` 
-  // `SELECT * FROM activities 
-  // JOIN users_activities ON activities.id = users_activities.activity_id
-  // JOIN user_info ON users_activities.user_info_id = user_info.id
-  `SELECT activity_name, activities.id as activity_id, location_name, category_name, url FROM activities
-JOIN users_activities ON activities.id = users_activities.activity_id
-JOIN user_info ON users_activities.user_info_id = user_info.id
-JOIN activity_locations ON activities.id = activity_locations.activity_id
-JOIN locations ON activity_locations.location_id = locations.id
-JOIN activity_category ON activities.id = activity_category.activity_id
-JOIN category ON activity_category.category_id = category.id
-JOIN activity_detail_urls ON activities.id = activity_detail_urls.activity_id
-JOIN detail_urls ON activity_detail_urls.detail_url_id = detail_urls.id
-WHERE username = $1`
-
-
-
-
- //WHERE username = $1`
-  // const activities = activity.map(el => {
-
-  // }) 
- db.query(queryString, [username])
+  `SELECT activity_name, completed, activities.id as activity_id, location_name, category_name, url FROM activities
+  JOIN users_activities ON activities.id = users_activities.activity_id
+  JOIN user_info ON users_activities.user_info_id = user_info.id
+  JOIN activity_locations ON activities.id = activity_locations.activity_id
+  JOIN locations ON activity_locations.location_id = locations.id
+  JOIN activity_category ON activities.id = activity_category.activity_id
+  JOIN category ON activity_category.category_id = category.id
+  JOIN activity_detail_urls ON activities.id = activity_detail_urls.activity_id
+  JOIN detail_urls ON activity_detail_urls.detail_url_id = detail_urls.id
+  WHERE username = $1`
+  db.query(queryString, [username])
   .then(data => {
     // console.log('data.rows in activityController.getActivities', data.rows);
     const cache = {}
-    
     data.rows.forEach(row => {
       if (!cache[row.activity_id]) {
         cache[row.activity_id] = [];
@@ -49,13 +36,23 @@ WHERE username = $1`
       let activityObj;
       for (const activity of data.rows) {
         if (key === activity.activity_id) {
-          activityObj = activity;
+          const {
+            activity_name: activityName,
+            activity_id: activityId,
+            completed,
+            location_name: locationName,
+            category_name: categoryName
+          } = activity;
+
+          activityObj = { activityName, completed, activityId, locationName, categoryName };
+          
           break;
         }
       }
-      activityObj.url = cache[key];
+      activityObj.urls = cache[key];
       return activityObj;
-    })
+    });
+    
     res.locals.afterGet = activityArray
     console.log(activityArray);
     return next(); 
@@ -71,7 +68,7 @@ WHERE username = $1`
 
 //post controller 
 activityController.postActivity = (req, res, next) => {
-  const { username } = req.params;
+  const { username, activity_name, category_name, urls } = req.body;
   const queryString = ``
  db.query(queryString, [username])
   .then(data => {
@@ -90,7 +87,7 @@ activityController.postActivity = (req, res, next) => {
 
 //delete controller 
 activityController.deleteActivity = (req, res, next) => {
-  const { username } = req.params;
+  const { username, activity_id } = req.body;
   const queryString = ``
  db.query(queryString, [username])
   .then(data => {
