@@ -37,7 +37,7 @@ const ActivityPage = () => {
     <div id='ActivityPage'>
       <button id='addActivityButton' onClick={() => setExpanded(!expanded)}>Add New Activity</button>
       {expanded && <AddActivity category={category} setActivityArray={setActivityArray} expanded={expanded} setExpanded={setExpanded} />}
-      <ActivityContainer activityArray={activityArray} />
+      {/* <ActivityContainer activityArray={activityArray} /> */}
       <ActivityContainer activityArray={activitiesFromCategory} />
     </div>
   );

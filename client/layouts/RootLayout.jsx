@@ -9,22 +9,18 @@ const RootLayout = () => {
   const { pathname: locationURL } = useLocation();
   const [ userHomePage, setUserHomePage ] = useState(`/UserHomePage/`);
   const [ activity, setActivity ] = useState(`/Activity/`);
-
-
-  console.log(locationURL)
-
-  // let userHomePage, activity;
+  
   useEffect(() => {
     if (user?.username && category) {
-      setActivity(`/Activity/${user.username}/${category}`)
+      setActivity(`/Activity/${encodeURIComponent(user.username)}/${encodeURIComponent(category)}`);
     } else {
-      setActivity(`/Activity/`)
+      setActivity(`/Activity/`);
     }
     
     if (user?.username) {
-      setUserHomePage(`/UserHomePage/${user.username}`)
+      setUserHomePage(`/UserHomePage/${encodeURIComponent(user.username)}`);
     } else {
-      setUserHomePage(`/UserHomePage/`)
+      setUserHomePage(`/UserHomePage/`);
     }
   }, [user, category])
 
