@@ -74,7 +74,9 @@ const UserHomePage = () => {
   
 	
 	return (
-		<>
+    <div className='home-page'>
+      <div className= 'home-page-func'>
+    <>
 			<div className='user-home-page'>
 				<h1>User Home Page</h1>
 				<div id='create-new-category-div' className=' '>
@@ -91,8 +93,10 @@ const UserHomePage = () => {
         {/* {JSON.stringify(filterCategory(loadedActivities))} */}
         <br />
         {makeCategoryButtons(loadedActivities)}
-			</div>
-		</>
+      </div>
+        </>
+        </div>
+      </div>
 	);
 };
 
