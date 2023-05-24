@@ -74,7 +74,7 @@ const UserHomePage = () => {
   
 	
 	return (
-		<div className='home-page'>
+    <div className='home-page'>
       <div className= 'home-page-func'>
     <>
 			<div className='user-home-page'>
