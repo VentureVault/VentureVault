@@ -5,7 +5,11 @@ import React, { useState, useEffect } from 'react';
 const PageTwo = () => {
 
   const handleClick = async () => {
-    const response = await fetch('/api/user');
+    const response = await fetch('/api/activity/get-all', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ username: 'das' })
+    });
     if (response.status === 200) {
       const res = await response.json();
       console.log(res);
