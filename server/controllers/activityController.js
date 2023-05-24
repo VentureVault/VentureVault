@@ -145,9 +145,7 @@ activityController.postActivity = async (req, res, next) => {
   };
   
 
-
-
-//delete/update controller 
+//update controller 
 activityController.updateActivity = (req, res, next) => {
   const { completed, activity_id } = req.body;
   
@@ -155,7 +153,7 @@ activityController.updateActivity = (req, res, next) => {
  db.query(queryString, [!completed, activity_id])
   .then(data => {
     console.log('data.rows in activityController.updateActivity', data.rows);
-    res.locals.afterDelete = data.rows
+    res.locals.afterUpdate = data.rows
     return next(); 
   })
   .catch((err) => {
@@ -165,6 +163,11 @@ activityController.updateActivity = (req, res, next) => {
 			message:'Failed to execute query to UPDATE activities',
 		});
 	});
+}
+
+//delete controller 
+activityController.deleteActivity = (req, res, next) => {
+  const { completed, activity_id } = req.body;
 }
 
 module.exports = activityController;

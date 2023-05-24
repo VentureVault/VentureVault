@@ -22,15 +22,25 @@ activityRouter.post('/',
   }
 );
 
-// delete/patch Activity
+// patch Activity
 activityRouter.patch('/',
 activityController.updateActivity,
+//activityController.getActivities,
+  (req, res) => {
+    //console.log('--Sending data from DELETE request from /api/activity/--',res.locals.afterGet);
+    return res.status(200).json(res.locals.afterUpdate);
+  }
+);
+
+activityRouter.delete('/',
+activityController.deleteActivity,
 //activityController.getActivities,
   (req, res) => {
     //console.log('--Sending data from DELETE request from /api/activity/--',res.locals.afterGet);
     return res.status(200).json(res.locals.afterDelete);
   }
 );
+
 
 
 module.exports = activityRouter;
