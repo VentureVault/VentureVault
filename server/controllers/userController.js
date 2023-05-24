@@ -5,13 +5,13 @@ const userController = {};
 
 const saltRound = 10
 
-//Add controllers here!
 
-//signup controller
+//Signup controllers
 
 userController.checkUsername = (req, res, next) => {
+  // console.log('req.body', JSON.stringify(req.body));
 	const { username, password, first_name } = req.body;
-
+  // console.log('signup vars',username, password, first_name)
 	res.locals.user = {}
 	
 	const queryString = `SELECT * FROM user_info
@@ -38,14 +38,19 @@ userController.checkUsername = (req, res, next) => {
 			return next(errorObj);
 		});
 };
-// let hashedPw;
+
 userController.userSignup = async (req, res, next) => {
 	if (res.locals.user.status !== 'valid') {
 		return next();
 	 }
-	const { newUser } = res.locals;
+  const { newUser } = res.locals;
+
+  // console.log('newUser.username', newUser.username, typeof newUser.username)
+  // console.log('newUser.password', newUser.password, typeof newUser.password)
+  // console.log('newUser.first_name', newUser.first_name, typeof newUser.first_name)
+
 	const hashedPw = await bcrypt.hash(newUser.password, saltRound)
-	console.log('hashedPw', hashedPw)
+	// console.log('hashedPw', hashedPw, typeof hashedPw)
   const queryString = `INSERT INTO user_info (username, password, first_name) 
 											VALUES ( $1, $2, $3)
 											RETURNING *`
@@ -55,7 +60,7 @@ userController.userSignup = async (req, res, next) => {
     // console.log('data.rows in userController.userSignup', data.rows);
 		res.locals.user.username = data.rows[0].username;
 		res.locals.user.firstName = data.rows[0].first_name;
-		console.log(res.locals.user)
+		// console.log(res.locals.user)
     return next(); 
   })
   .catch((err) => {
@@ -67,7 +72,8 @@ userController.userSignup = async (req, res, next) => {
 	});
 }
 
-//login controller
+//Login controllers
+
 userController.userVarification = (req, res, next) => {
 	const { username, password } = req.body;
 	const queryString = `SELECT * FROM user_info WHERE username = $1`;
@@ -91,7 +97,7 @@ userController.userVarification = (req, res, next) => {
 			res.locals.user.username = data.rows[0].username;
 			res.locals.user.firstName = data.rows[0].first_name;
 			res.locals.user.status = 'valid';
-			console.log(res.locals.user)
+			// console.log(res.locals.user)
 			return next();
   })
   .catch((err) => {

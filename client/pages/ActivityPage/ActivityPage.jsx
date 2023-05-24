@@ -1,6 +1,8 @@
-import React, { useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 
 import ActivityContainer from './components/ActivityContainer'
+import { useLoaderData } from 'react-router-dom';
+import { pageContext } from '../../context';
 
 const mockActivityObject1 = {
   activityName: 'Hike the PCT',
@@ -19,15 +21,22 @@ const mockActivityObject2 = {
 const mockActivityArray = [mockActivityObject1, mockActivityObject2];
 
 const ActivityPage = () => {
-
+  const activitiesFromCategory = useLoaderData();
   const [activityArray, setActivityArray] = useState(mockActivityArray); // *** change for real data
   const [expanded, setExpanded] = useState(false);
+  const { pageInfo } = useContext(pageContext);
+
+  useEffect(() => {
+    pageInfo.current = '/Activity';
+  }, []);
+
 
   return (
     <div id='ActivityPage'>
       <button id='addActivityButton' onClick={() => setExpanded(!expanded)}>Add New Activity</button>
       {expanded && <AddActivity />}
       <ActivityContainer activityArray={activityArray} />
+      <ActivityContainer activityArray={activitiesFromCategory} />
     </div>
   );
 };
