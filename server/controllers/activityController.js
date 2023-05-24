@@ -7,8 +7,9 @@ const activityController = {};
 //get controller
 
 activityController.getActivities = (req, res, next) => {
-  const { username } = req.body;
-  //const { first_name } = req.body;
+  
+  const username = req.body.username || req.params.username;
+
   const queryString = 
     //`SELECT * FROM activities`
   `SELECT activity_name, completed, activities.id as activity_id, location_name, category_name, url FROM activities
@@ -144,36 +145,24 @@ activityController.postActivity = async (req, res, next) => {
   };
   
 
-  // INSERT INTO category (category_name) VALUES ($3);
-  // INSERT INTO detail_urls (url) VALUES ($4);`
-  // INSERT INTO detail_urls (url) VALUES ($5);
-  // INSERT INTO detail_urls (url) VALUES ($6);`
-
-  // let queryString = urlQueryBuilder(urls);
-  // console.log('URLS', urls, typeof urls);
-  // console.log(queryString);
 
 
-//delete controller 
-activityController.deleteActivity = (req, res, next) => {
-  const { username, activity_id } = req.body;
-
-  //get ids
-  //delete ids in join tables
-  //delete items from each table
-
-  const queryString = ``
- db.query(queryString, [username])
+//delete/update controller 
+activityController.updateActivity = (req, res, next) => {
+  const { completed, activity_id } = req.body;
+  
+  const queryString = `UPDATE activities SET completed = $1 WHERE id = $2 RETURNING *`
+ db.query(queryString, [!completed, activity_id])
   .then(data => {
-    console.log('data.rows in activityController.deleteActivity', data.rows);
+    console.log('data.rows in activityController.updateActivity', data.rows);
     res.locals.afterDelete = data.rows
     return next(); 
   })
   .catch((err) => {
 		return next({
-			log: `activityController.deleteActivity middleware error: ${err.message}`,
+			log: `activityController.updateActivity middleware error: ${err.message}`,
 			status: 501,
-			message:'Failed to execute query to DELETE all activities',
+			message:'Failed to execute query to UPDATE activities',
 		});
 	});
 }
