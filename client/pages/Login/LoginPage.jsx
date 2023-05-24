@@ -31,7 +31,7 @@ const LoginPage = () => {
 	return (
 		<div className= 'login-page'>
 		<div className='login-container'>
-			<h1>Your very own Venture Vault!</h1>
+			<h1>Venture Vault</h1>
 			<h2>Please Log In</h2>
 			<br></br>
 			<Form method='post' action='/' className='login-form'>

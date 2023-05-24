@@ -54,28 +54,31 @@ const AddActivity = ({ category, setActivityArray, expanded, setExpanded }) => {
   }
 
   return (
-    <main className='new-trip-page'>
-      <p className='title'>Add your item!</p>
-      <div className='container'>
-      <label>
-          <span className='question'>What's your objective?</span>
-          <input className='new-trip-text' type="text" value={activityName} name="activityName" onChange={(e) => {setActivityName(e.target.value)}}/>
-        </label>
-        <label>
-            <span className='question'>Where will it be?</span>
-            <input className='new-trip-text' type="text" value={locationName} name="activityName" onChange={(e) => {setLocationName(e.target.value)}}/>
-        </label>
-        urls:
+    <main className='new-activity-page'>
+
+      <div className='addActivityContainer'>
+        <div className='entryDiv'>
+          <span className='bucketlistEntry'>What's your objective?</span>
+          <input className='bucketlistText' type="text" value={activityName} name="activityName" onChange={(e) => {setActivityName(e.target.value)}}/>
+        </div>
+
+        <div className='entryDiv'>
+            <span className='bucketlistEntry'>Location</span>
+            <input className='bucketlistText' type="text" value={locationName} name="activityName" onChange={(e) => {setLocationName(e.target.value)}}/>
+        </div>
+        {/* urls: */}
         <br />
-        {urls}
-        <label>
-            <span className='question'>Add a useful link!</span>
-            <input className='new-trip-text' type="text" value={url} name="url" onChange={(e) => {setUrl(e.target.value)}}/>
-        </label>
-        <button onClick={addUrl}>Add url</button>
+        {/* {urls} */}
+        <div className='urlDiv'>
+          <span className='urlEntry'>Add helpful links: </span>
+            <div className='urlInput'>
+              <input className='bucketlistText' type="text" value={url} name="url" onChange={(e) => {setUrl(e.target.value)}}/>
+              <button className='addUrlButton'onClick={addUrl}>+</button>
+            </div>
+        </div>
         
-        <div className="trip-button">
-          <button onClick={addItem}>Add Item!</button>
+        <div className="addBucketlistEntry">
+          <button className="addBucketlistEntryButton" onClick={addItem}>Add to bucket list!</button>
         </div>
       </div>
 
