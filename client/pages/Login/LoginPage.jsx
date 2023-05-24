@@ -58,7 +58,6 @@ const LoginPage = () => {
 
 export const loginAction = async ({ request }) => {
 	const loginInfo = await request.formData();
-
 	//need to pull data from DB and check to see if authentication passed
 
 	const res = await fetch('/api/user/login', {

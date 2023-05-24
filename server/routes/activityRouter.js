@@ -44,7 +44,7 @@ activityController.updateActivity,
 );
 
 activityRouter.delete('/',
-activityController.deleteActivity,
+//activityController.deleteActivity,
 //activityController.getActivities,
   (req, res) => {
     //console.log('--Sending data from DELETE request from /api/activity/--',res.locals.afterGet);
