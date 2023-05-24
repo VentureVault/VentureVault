@@ -1,5 +1,7 @@
 body {
   font-family: Arial, Helvetica, sans-serif;
+  /* background: rgb(32,144,164);
+background: linear-gradient(0deg, rgba(32,144,164,1) 0%, rgba(154,180,169,1) 100%); */
 }
 
 /* <~~~~~ COMPUTER SCREENS ~~~~~> */
@@ -12,11 +14,19 @@ body {
   border: 1px;
 };
 
+#addActivityButton {
+  margin-top: 2%;
+  margin-bottom: 2%;
+  height: 40px;
+  /* background-color: ; */
+  /* border: none; */
+}
+
 #activityContainer {
   display: flex;
   flex-direction: column;
   justify-content: space-around;
-  /* row-gap: 20px; */
+  row-gap: 10px;
 };
 
 .activity {
@@ -34,7 +44,7 @@ body {
 .checkBox {
   margin: 2%;
   width: 2%;
-  flex: 0 0 5%;
+  flex: 0 0 30px;
   /* align-self: center */
 };
 
@@ -80,6 +90,7 @@ body {
 
 .urlContainer {
   margin-left: 15%;
+  margin-bottom: 10%;
   font-size:small
 };
 

@@ -3,7 +3,7 @@ import { createBrowserRouter, createRoutesFromElements, RouterProvider, Route } 
 
 //pages, loaders
 import Home from './pages/Home';
-import PageTwo from './pages/PageTwo';
+// import PageTwo from './pages/PageTwo';
 import ActivityPage from './pages/ActivityPage/ActivityPage';
 
 //context
@@ -16,10 +16,10 @@ const router = createBrowserRouter(
   createRoutesFromElements(
     <Route path='/' element={<RootLayout/>}>
       <Route index element={<Home/>} />
-      <Route
+      {/* <Route
         path='/PageTwo'
         element={<PageTwo key='PageTwo' />}
-      />
+      /> */}
       <Route
         path='/Activity'
         element={<ActivityPage key='ActivityPage' />}
