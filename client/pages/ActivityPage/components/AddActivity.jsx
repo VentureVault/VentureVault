@@ -85,8 +85,8 @@ const AddActivity = ({ category, setActivityArray, expanded, setExpanded }) => {
           {!validUrl && <div className='urlEntry'>URLs must start with http:// or https://</div>}
         </div>
         
-        <div className="trip-button">
-          <button onClick={addItem}>Add Item!</button>
+        <div className="addBucketlistEntry">
+          <button className="addBucketlistEntryButton" onClick={addItem}>Add to bucket list!</button>
         </div>
       </div>
 
