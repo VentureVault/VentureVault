@@ -28,9 +28,9 @@ const UserHomePage = () => {
 
   const handleCreateCategory = (e) => {
     e.preventDefault();
-    //check to make sure they've entered info into the newCategor input element
+    //check to make sure they've entered info into the newCategory input element
     if (newCategory === '') {
-      alert('Please enter a team name before submitting');
+      alert('Please enter a category name before submitting');
       return;
     }
 
@@ -49,9 +49,7 @@ const UserHomePage = () => {
       categorySet.add(activityObj.categoryName)
     }
       
-    const categoryArray = [];
-
-    categorySet.forEach(category => categoryArray.push(category));
+    const categoryArray = [...categorySet];
 
     return categoryArray.map(categoryFromArray => {
       return (
