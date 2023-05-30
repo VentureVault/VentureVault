@@ -1,4 +1,4 @@
-import React, { useState, useContext } from 'react';
+import React, { useState, useContext, useMemo } from 'react';
 import { userContext } from '../../../context';
 
 const AddActivity = ({ category, setActivityArray, expanded, setExpanded }) => {
@@ -6,11 +6,19 @@ const AddActivity = ({ category, setActivityArray, expanded, setExpanded }) => {
   const [activityName, setActivityName] = useState('');
   const [locationName, setLocationName] = useState('');
   const [url, setUrl] = useState('');
+  const [validUrl, setValidUrl] = useState(true);
   const [urls, setUrls] = useState([]);
+  const convertedUrls = useMemo(() => convertUrls(urls), [urls])
 
   const addUrl = () => {
-    setUrls([...urls, url]);
-    setUrl('');
+    const urlRegex = /http[s]{0,1}:\/\//i;
+    if (urlRegex.test(url)) {
+      setValidUrl(true);
+      setUrls([...urls, url]);
+      setUrl('');
+    } else {
+      setValidUrl(false);
+    }
   }
 
   const addItem = async () => {
@@ -23,7 +31,7 @@ const AddActivity = ({ category, setActivityArray, expanded, setExpanded }) => {
       username: user.username,
       activity_name: activityName,
       category_name: category
-    }
+    };
 
     if (locationName !== '') {
       body.location_name = locationName;
@@ -49,30 +57,33 @@ const AddActivity = ({ category, setActivityArray, expanded, setExpanded }) => {
       setExpanded(!expanded);
       setActivityArray(result);
     } else {
-      alert('Failed to add item')
+      alert('Failed to add item');
     }
   }
 
   return (
-    <main className='new-trip-page'>
-      <p className='title'>Add your item!</p>
-      <div className='container'>
-      <label>
-          <span className='question'>What's your objective?</span>
-          <input className='new-trip-text' type="text" value={activityName} name="activityName" onChange={(e) => {setActivityName(e.target.value)}}/>
-        </label>
-        <label>
-            <span className='question'>Where will it be?</span>
-            <input className='new-trip-text' type="text" value={locationName} name="activityName" onChange={(e) => {setLocationName(e.target.value)}}/>
-        </label>
-        urls:
-        <br />
-        {urls}
-        <label>
-            <span className='question'>Add a useful link!</span>
-            <input className='new-trip-text' type="text" value={url} name="url" onChange={(e) => {setUrl(e.target.value)}}/>
-        </label>
-        <button onClick={addUrl}>Add url</button>
+    <main className='new-activity-page'>
+
+      <div className='addActivityContainer'>
+        <div className='entryDiv'>
+          <span className='bucketlistEntry'>What do you want to add to this list?</span>
+          <input className='bucketlistText' type="text" value={activityName} placeholder='Enter new list item here' name="activityName" onChange={(e) => {setActivityName(e.target.value)}}/>
+        </div>
+
+        <div className='entryDiv'>
+            <span className='bucketlistEntry'>Location</span>
+            <input className='bucketlistText' type="text" value={locationName} placeholder='Optional: Enter location here' name="activityName" onChange={(e) => {setLocationName(e.target.value)}}/>
+        </div>
+
+        <div className='urlDiv'>
+          <span className='urlEntry'>Add helpful links: </span>
+            {convertedUrls}
+          <div className='urlInput'>
+            <input className='bucketlistText' type="text" value={url} placeholder='Optional: Enter full url here' name="url" onChange={(e) => {setUrl(e.target.value)}}/>
+            <button className='addUrlButton' onClick={addUrl}>+</button>
+          </div>
+          {!validUrl && <div className='urlEntry'>URLs must start with http:// or https://</div>}
+        </div>
         
         <div className="trip-button">
           <button onClick={addItem}>Add Item!</button>
@@ -84,3 +95,20 @@ const AddActivity = ({ category, setActivityArray, expanded, setExpanded }) => {
 }
 
 export default AddActivity
+
+
+function convertUrls(urls) {
+  if (urls.length === 0) return;
+
+  return (
+    <div className='entryDiv'>
+      {urls.map(url => (
+        <div className='bucketlistEntry'>
+          <a href={url} target="_blank" >
+            {url}
+          </a>
+        </div>
+      ))}
+    </div>
+  );
+}
