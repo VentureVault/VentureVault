@@ -1,12 +1,11 @@
-import React, { useState, useContext, useEffect } from 'react';
+import React, { useState, useContext, useEffect, useMemo } from 'react';
 import { userContext, categoryContext, pageContext } from '../../context';
 import { useLoaderData, useNavigate } from 'react-router-dom';
-// import TeamDisplay from './components/TeamDisplay';
 
 
 const UserHomePage = () => {
   const loadedActivities = useLoaderData();
-	const { user, setUser } = useContext(userContext);
+	const { user } = useContext(userContext);
   const {category, setCategory} = useContext(categoryContext);
   const { pageInfo } = useContext(pageContext);
 	const [newCategory, setNewCategory] = useState('');
@@ -27,7 +26,7 @@ const UserHomePage = () => {
   }, [category])
 
 
-  const handleCreateCategory = async (e) => {
+  const handleCreateCategory = (e) => {
     e.preventDefault();
     //check to make sure they've entered info into the newCategor input element
     if (newCategory === '') {
@@ -44,7 +43,7 @@ const UserHomePage = () => {
   
   const makeCategoryButtons = (activityArray) => {
 
-    let categorySet = new Set()
+    let categorySet = new Set();
 
     for (const activityObj of activityArray) {
       categorySet.add(activityObj.categoryName)
@@ -52,26 +51,28 @@ const UserHomePage = () => {
       
     const categoryArray = [];
 
-    categorySet.forEach(category => categoryArray.push(category))
+    categorySet.forEach(category => categoryArray.push(category));
 
-    return categoryArray.map(cat => {
+    return categoryArray.map(categoryFromArray => {
       return (
         <button
           onClick={() => {
             pageInfo.current = '/UserHomePage';
-            if (category === cat) {
+            if (category === categoryFromArray) {
               return navigate(`/Activity/${user.username}/${category}`)
             } else {
-              setCategory(cat);
+              setCategory(categoryFromArray);
             }
           }}
         >
-          {cat}
+          {categoryFromArray}
         </button>
       );
     });
   };
   
+  // Caches result so makeCategoryButtons doesn't execute every time "newCategory" is updated
+  const categoryButtons = useMemo(() => makeCategoryButtons(loadedActivities), [loadedActivities]);
 	
 	return (
     <div className='home-page'>
@@ -90,9 +91,8 @@ const UserHomePage = () => {
 			</div>
 			<div id='category-container-div' className=''>
 				<h2>Your Categories</h2>
-        {/* {JSON.stringify(filterCategory(loadedActivities))} */}
         <br />
-        {makeCategoryButtons(loadedActivities)}
+        {categoryButtons}
       </div>
         </>
         </div>
@@ -102,17 +102,3 @@ const UserHomePage = () => {
 
 export default UserHomePage;
 
-
-function filterCategory(activityArray) {
-  let categorySet = new Set()
-
-  for (const activityObj of activityArray) {
-    categorySet.add(activityObj.categoryName)
-  }
-  
-  const result = [];
-
-  categorySet.forEach(category => result.push(category))
-
-  return result
-}
